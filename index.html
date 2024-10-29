@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HGZ 01 - Oaxaca</title> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <h2 align="center" >Formulario de Observación</h2>
+    <h5 align="center" ><script type="text/javascript">var timestamp = new Date();document.write(timestamp.toLocaleString("es-mx"));</script></h5>
+    <!---<center><select id="hospital" style="max-width: 600px; align-items: center; margin: auto;" required>
+        <option style="display:none"></option>
+        <option value='HGZ 01'>HGZ 01</option>
+        <option value="HGZMF 02">HGZMF 02</option>
+        <option value="HGZ 03">HGZ 03</option>
+        <option value="HGSMF 41">HGSMF 41</option>
+    </select></center> --->
+    <div class="form-container">
+        <form id="dataForm" onsubmit="event.preventDefault(); submitForm();">
+            <div class="form-group">
+                <label for="turno">Turno:</label>
+                <select id="turno" name="turno" required> <!-- LISTA DESPEGABLE DE TURNOS  -->
+                    <option style="display:none"></option>
+                    <option value="Jornada Acumulada">Jornada Acumulada</option>
+                    <option value="Matutino">Matutino</option>
+                    <option value="Vespertino">Vespertino</option>
+                    <option value="Nocturno">Nocturno</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="servicio">Servicio:</label>
+                <select id="servicio" name="servicio" required> <!-- LISTA DESPEGABLE DE SERVICIOS -->
+                    <option style="display:none"></option>
+                    <option value="Cirugia General">Cirugía General</option>
+                    <option value="Consulta Externa">Consulta Externa</option>
+                    <option value="Cunero Patologico">Cunero Patológico</option>
+                    <option value="Endocrinologia Y Nutricion">Endocrinología Y Nutrición</option>
+                    <option value="Endoscopia">Endoscopia</option>
+                    <option value="Gastroenterologia Pediatrica">Gastroenterología Pediátrica</option>
+                    <option value="Ginecologia">Ginecología</option>
+                    <option value="Ginecologia Y Obstetricia">Ginecología Y Obstetricia</option>
+                    <option value="Hematologia">Hematología</option>
+                    <option value="Hemodialisis">Hemodiálisis</option>
+                    <option value="Infectologia">Infectología</option>
+                    <option value="Laboratorio">Laboratorio</option>
+                    <option value="Medicina Familiar">Medicina Familiar</option>
+                    <option value="Medicina Interna">Medicina Interna</option>
+                    <option value="Nefrologia">Nefrología</option>
+                    <option value="Nutricion Y Dietetica">Nutrición Y Dietética</option>
+                    <option value="Obstetricia">Obstetricia</option>
+                    <option value="Oncologia Medica Pediatrica">Oncología Medica Pediátrica</option>
+                    <option value="Ortopedia  Y Traumatologia">Ortopedia  Y Traumatología</option>
+                    <option value="Pediatria Medica">Pediatría Medica</option>
+                    <option value="Quimioterapia">Quimioterapia</option>
+                    <option value="Quirofano">Quirófano</option>
+                    <option value="U.C.I. Adultos">U.C.I. Adultos</option>
+                    <option value="U.C.I. Neonatales">U.C.I. Neonatales</option>
+                    <option value="Urgencias">Urgencias</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>     
+            <div class="form-group">                
+                <label id="serviciotag" for="otroServicio" style="margin-left: 10px;" hidden>Especifique:</label>
+                <input id="serviciotxt" type="text" name="otroServicio" placeholder="Otro servicio: " hidden>
+            </div>
+            
+            <div class="form-group">
+                <fieldset class="field2"> <!-- CUADRO CON OBSERVADOR  -->
+                    <legend><b>OBSERVADOR</b></legend> 
+                    <div>
+                        <input class="observador" type="text" id="nombre" name="nombre" placeholder="Nombre" style="width:55%" required>
+                        <input class="observador" type="number" id="matricula" name="matricula" placeholder="Matrícula" style="width:35%" required>
+                    </div>
+                </fieldset>
+            </div>
+
+            <hr class="line" color='#00594c' width=120% size="10px">
+
+            <center>
+            <div class="form-group" style="margin-top:20PX; margin-bottom: 10px; align-items: center;">
+                <fieldset class="field2">
+                    <label for="oportunidad"><b>OPORTUNIDAD: </b></label>
+                    <input id="1" type="checkbox" name="oportunidad" checked>  1
+                    <input id="2" type="checkbox" name="oportunidad" disabled>  2
+                    <input id="3" type="checkbox" name="oportunidad" disabled>  3
+                    <input id="4" type="checkbox" name="oportunidad" disabled>  4
+                    <input id="5" type="checkbox" name="oportunidad" disabled>  5
+                    <input id="6" type="checkbox" name="oportunidad" disabled>  6
+                    <input id="7" type="checkbox" name="oportunidad" disabled>  7
+                    <input id="8" type="checkbox" name="oportunidad" disabled>  8                    
+                </fieldset>
+            </div>
+            </center>
+
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select id ="categoria" name="categoria" required> <!-- LISTA DESPLEGABLE CON CATEGORIAS  -->
+                    <option name="categoria" style="display:none"></option>
+                    <option name="categoria" value="Asistente Medica">Asistente Médica</option>
+                    <option name="categoria" value="Camillero">Camillero</option>
+                    <option name="categoria" value="Conservacion">Conservación</option>
+                    <option name="categoria" value="Enfermera">Enfermera</option>
+                    <option name="categoria" value="Estudiante">Estudiante</option>
+                    <option name="categoria" value="Familiar">Familiar</option>
+                    <option name="categoria" value="Inhaloterapeuta">Inhaloterapeuta</option>
+                    <option name="categoria" value="Intendencia">Intendencia</option>
+                    <option name="categoria" value="Laboratorista">Laboratorista</option>
+                    <option name="categoria" value="Medico">Médico</option>
+                    <option name="categoria" value="Medico Interno">Medico Interno</option>
+                    <option name="categoria" value="Nutricion">Nutrición</option>
+                    <option name="categoria" value="Rayos X">Rayos X</option>
+                    <option name="categoria" value="Residente">Residente</option>
+                    <option name="categoria" value="Trabajador Social">Trabajador Social</option>
+                    <option name="categoria" value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">                
+                <label id="categoriatag" for="otroCategoria" style="margin-left: 10px;" hidden>Especifique:</label>
+                <input id="categoriatxt" type="text" name="otroCategoria" placeholder="Otra categoría: " hidden>
+            </div>
+
+            <div class="form-group" style="width: 35%; margin-right: auto; margin-left: auto; margin-bottom: 20px;">
+                <input id="matriculaOpo" type="number" name="matriculaOportunidad" placeholder="Matrícula a observar" required>
+            </div> 
+            
+            <fieldset id="field1" class="field1"> <!-- CUADRO CON INDICACIONES -->
+                <legend>Indicación:</legend>
+                <div><input id="indicacion1" type="checkbox" name="indicacion" value="ant pac" /> Ant. pac.</label></div>
+                <div><input id="indicacion2" type="checkbox" name="indicacion" value="ant asept" /> Ant. asept.</label></div>
+                <div><input id="indicacion3" type="checkbox" name="indicacion" value="desp ent pac" /> Desp. ent. p.</label></div>
+                <div><input id="indicacion4" type="checkbox" name="indicacion" value="desp pac" /> Desp. pac.</label></div>
+                <div><input id="indicacion5" type="checkbox" name="indicacion" value="desp secre" /> Desp. fc.</label></div>
+            </fieldset>
+            <fieldset id="field2" class="field1"> <!-- CUADRO CON ACCIONES -->
+                <legend>Acción de HM:</legend>
+                <div><input type="radio" name="accion" value="FM" id="fm" /> FM</label></div>
+                <div><input type="radio" name="accion" value="LM" id="lm" /> LM</label></div>
+                <div><input type="radio" name="accion" value="Omision" id="omision" /> Omisión</label></div>
+                <div></div>
+                <div><input type="checkbox" name="guantes" class="checkbox" id="guantes" disabled> Guantes</div>
+            </fieldset>
+
+            <div align="center" style="margin-top: 20px;">
+                <button id="reset" type="reset" class="boton">Limpiar</button>
+                <button id="submit" type="submit" class="boton">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="result"></div>
+
+    <footer style="max-width: 650px; align-items: center; margin: auto; font-size: 12px;"> <!-- FOOTER CON ESPECIFICACIONES DE NOMENCLATURAS  -->
+        <table style="width: 100%; text-align: left;">
+            <tr>
+                <th colspan="2">Indicación</th>
+                <th style="width: 46%">Acción de Higiene de manos</th>
+            </tr>
+            <tr>
+                <td style="width:12%">Ant. pac.</td>
+                <td>Antes del contacto con el paciente.</td>
+                <td>FM - Fricción de manos con preparado a base de alcohol.</td>
+            </tr>
+            <tr>
+                <td>Ant. asept.</td>
+                <td>Antes de un procedimiento limpio / aséptico.</td>
+                <td>LM - Lavado de manos con agua y jabón.</td>
+            </tr>
+            <tr>
+                <td>Desp. ent. p.</td>
+                <td>Después de contacto con entorno del paciente.</td>
+            </tr>
+            <tr>
+                <td>Desp. pac.</td>
+                <td>Después de contacto con paciente.</td>
+            </tr>
+            <tr>
+                <td>Desp. fc.</td>
+                <td>Después de riesgo a exposición de fluidos corporales.</td>
+            </tr>
+        </table>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
