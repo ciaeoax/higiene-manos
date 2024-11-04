@@ -10,13 +10,9 @@
 <body>
     <h2 align="center" >Formulario de Observación</h2>
     <h5 align="center" ><script type="text/javascript">var timestamp = new Date();document.write(timestamp.toLocaleString("es-mx"));</script></h5>
-    <!---<center><select id="hospital" style="max-width: 600px; align-items: center; margin: auto;" required>
-        <option style="display:none"></option>
-        <option value='HGZ 01'>HGZ 01</option>
-        <option value="HGZMF 02">HGZMF 02</option>
-        <option value="HGZ 03">HGZ 03</option>
-        <option value="HGSMF 41">HGSMF 41</option>
-    </select></center> --->
+    <div id="loader" hidden>
+        <i class="fa-solid fa-spinner fa-spin-pulse fa-2xl"></i>
+    </div>
     <div class="form-container">
         <form id="dataForm" onsubmit="event.preventDefault(); submitForm();">
             <div class="form-group">
