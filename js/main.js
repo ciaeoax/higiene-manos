@@ -47,27 +47,32 @@ async function submitForm() {
     if (typeof initTime === 'undefined'){
         alert('Cambie Categoría a cualquier otro valor y regrese al valor original.');
         document.getElementById('submit').disabled = false;
+        loader.hidden = true;
         return;
     }
     if (!(document.getElementById('nombre').value).includes(" ")) {
         alert('Ingrese su Nombre Completo.');
         document.getElementById('submit').disabled = false;
+        loader.hidden = true;
         return;
     }
     if (document.getElementById('matricula').value.length != 8){
         alert('Ingrese una Matricula correcta: 8 dígitos.');
         document.getElementById('submit').disabled = false;
+        loader.hidden = true;
         return;
     }
     if (document.getElementById('matriculaOpo').value.length != 8){
         alert('Ingrese una Matricula correcta: 8 dígitos.');
         document.getElementById('submit').disabled = false;
+        loader.hidden = true;
         return;
     }
     if (document.getElementById('servicio').value=="Otro"){
         serviciovalue = document.getElementById('serviciotxt').value;
         if (serviciovalue == ''){
             document.getElementById('submit').disabled = false;
+            loader.hidden = true;
             alert('Escriba el otro servicio. Seleccione un valor diferente y seleccione nuevamente Otro. O recargue.');
             return;
         }
@@ -78,6 +83,7 @@ async function submitForm() {
         categoriavalue = document.getElementById('categoriatxt').value;
         if (categoriavalue == ''){
             document.getElementById('submit').disabled = false;
+            loader.hidden = true;
             alert('Escriba la otra categoría. Seleccione un valor diferente y seleccione nuevamente Otro. O recargue.');
             return;
         }
@@ -90,6 +96,7 @@ async function submitForm() {
     if (!selected_ind){
         alert('Seleccione al menos una indicación.')
         document.getElementById('submit').disabled = false;
+        loader.hidden = true;
         return;
     }
     //console.log(values_ind);
@@ -114,7 +121,7 @@ async function submitForm() {
         matricula2: document.getElementById('matriculaOpo').value
     };
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwdkVELMEB_kWPgmj8bLOARGG9A6zWeOmHLhYVmc0fsqU67Ieh9IkUPoDGKSLzvgsP5/exec', { // Replace with your Google Apps Script URL
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwdkVELMEB_kWPgmj8bLOARGG9A6zWeOmHLhYVmc0fsqU67Ieh9IkUPoDGKSLzvgsP5/exec', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain;charset=utf-8'
@@ -147,13 +154,12 @@ async function submitForm() {
                 document.querySelector("input[name=accion]:checked").checked = false;
                 document.getElementById('guantes').checked = false;
                 document.getElementById('submit').disabled = false;
+                loader.hidden = true;
                 return;
             }
-            console.log('Data saved and received:', formData, result.data.length); //result.data[0]["oportunidad"]
-            //document.getElementById('result').textContent = JSON.stringify(result.data, null, 2);
+            console.log('Data saved and received:', formData, result.data.length); 
             alert('Información registrada correctamente.');
             document.getElementById('guantes').checked = false;
-            //document.querySelector("input[name=indicacion]:checked").checked = false;
             document.querySelector("input[name=accion]:checked").checked = false;
             document.getElementById('categoriatag').hidden = true;
             document.getElementById('categoriatxt').hidden = true;
