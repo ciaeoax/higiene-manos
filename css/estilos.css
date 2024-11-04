@@ -93,3 +93,9 @@ footer{
 .line{
     margin-left: -50px;
 }
+.loader{
+    text-align: center; 
+    max-width: 338px; 
+    margin: auto; 
+    margin-top: 10px;
+}
