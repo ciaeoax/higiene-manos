@@ -41,6 +41,8 @@ document.getElementById('categoria').addEventListener('change', function(event){
     }
 });
 async function submitForm() {
+    var loader = document.getElementById('loader');
+    loader.hidden = false;
     document.getElementById('submit').disabled = true;
     if (typeof initTime === 'undefined'){
         alert('Cambie Categoría a cualquier otro valor y regrese al valor original.');
@@ -171,6 +173,7 @@ async function submitForm() {
             for (var i = 1; i <= 5; i++) {
                 document.getElementById('indicacion'+i.toString()).checked = false;
             }
+            loader.hidden = true;
         } else {
             console.error('Error:', result.message);
             document.getElementById('result').textContent = `Error: ${result.message}`;
