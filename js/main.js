@@ -120,8 +120,18 @@ async function submitForm() {
         time: duracion,
         matricula2: document.getElementById('matriculaOpo').value
     };
+    if (document.getElementById('hospital').value == 'HGZ 01'){
+        console.log(document.getElementById('hospital').value);
+        url = 'https://script.google.com/macros/s/AKfycbygcC5d6p6p7vgO3IX7GqH5PGDSQGHe_u2hfTIK7FljMpR_BlMCzcEZNhUjrnuKReNs/exec'
+    }else if (document.getElementById('hospital').value == 'HGZMF 02'){
+        url = 'https://script.google.com/macros/s/AKfycbxV8YJsaPwDTMARYsArsxL8IlqhaasZgeWHKBtnD2xtPebDjWZuxxz52a2Lm3v7qKht/exec'
+    }else if (document.getElementById('hospital').value == 'HGZ 03'){
+        url = 'https://script.google.com/macros/s/AKfycby0HkIzc8OpF_GWImp2uMNOjYGK0h8l7ytH_HP7uplCV4wUkuXXtFAhpbF2X5W343SV7g/exec'
+    }else if (document.getElementById('hospital').value == 'HGSMF 41'){
+        url = 'https://script.google.com/macros/s/AKfycbwdkVELMEB_kWPgmj8bLOARGG9A6zWeOmHLhYVmc0fsqU67Ieh9IkUPoDGKSLzvgsP5/exec'
+    }
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwdkVELMEB_kWPgmj8bLOARGG9A6zWeOmHLhYVmc0fsqU67Ieh9IkUPoDGKSLzvgsP5/exec', { 
+        const response = await fetch(url, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain;charset=utf-8'
