@@ -14,6 +14,16 @@
     <div class="loader" id="loader" hidden>
         <i class="fa-solid fa-spinner fa-spin-pulse fa-2xl"></i>
     </div>
+    <center>
+        <label>Unidad:</label>
+        <select id="hospital" style="max-width: 600px; align-items: center; margin: auto;" required>
+            <option style="display:none"></option>
+            <option value="HGZ 01">HGZ 01</option>
+            <option value="HGZMF 02">HGZMF 02</option>
+            <option value="HGZ 03">HGZ 03</option>
+            <option value="HGSMF 41">HGSMF 41</option>
+        </select>
+    </center> 
     <div class="form-container">
         <form id="dataForm" onsubmit="event.preventDefault(); submitForm();">
             <div class="form-group">
