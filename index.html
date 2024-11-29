@@ -85,22 +85,9 @@
 
             <hr class="line" color='#00594c' width=120% size="10px">
 
-            <center>
-            <div class="form-group" style="margin-top:20PX; margin-bottom: 10px; align-items: center;">
-                <fieldset class="field2">
-                    <label for="oportunidad"><b>OPORTUNIDAD: </b></label>
-                    <input id="1" type="checkbox" name="oportunidad" checked>  1
-                    <input id="2" type="checkbox" name="oportunidad" disabled>  2
-                    <input id="3" type="checkbox" name="oportunidad" disabled>  3
-                    <input id="4" type="checkbox" name="oportunidad" disabled>  4
-                    <input id="5" type="checkbox" name="oportunidad" disabled>  5
-                    <input id="6" type="checkbox" name="oportunidad" disabled>  6
-                    <input id="7" type="checkbox" name="oportunidad" disabled>  7
-                    <input id="8" type="checkbox" name="oportunidad" disabled>  8                    
-                </fieldset>
+            <div class="form-group">
+                <label style="margin-top: 10px; width: 100%;"><b>REGISTRO </b></label>                
             </div>
-            </center>
-
             <div class="form-group">
                 <label for="categoria">Categoría:</label>
                 <select id ="categoria" name="categoria" required> <!-- LISTA DESPLEGABLE CON CATEGORIAS  -->
@@ -123,24 +110,43 @@
                     <option name="categoria" value="Otro">Otro</option>
                 </select>
             </div>
+
             <div class="form-group">                
                 <label id="categoriatag" for="otroCategoria" style="margin-left: 10px;" hidden>Especifique:</label>
                 <input id="categoriatxt" type="text" name="otroCategoria" placeholder="Otra categoría: " hidden>
             </div>
 
-            <div class="form-group" style="width: 35%; margin-right: auto; margin-left: auto; margin-bottom: 20px;">
+            <div class="form-group" style="margin-left: 20%; margin-bottom: 10px;">
                 <input id="matriculaOpo" type="number" name="matriculaOportunidad" placeholder="Matrícula a observar" required>
+                <button id='buscar' type="button" class="boton">Buscar</button>
             </div> 
+
+            <center>
+            <div class="form-group" style="margin-top:20PX; margin-bottom: 10px; align-items: center;">
+                <fieldset class="field2" >
+                    <label for="oportunidad"><b>OPORTUNIDAD: </b></label>
+                    <input id="1" type="checkbox" name="oportunidad" disabled>  1
+                    <input id="2" type="checkbox" name="oportunidad" disabled>  2
+                    <input id="3" type="checkbox" name="oportunidad" disabled>  3
+                    <input id="4" type="checkbox" name="oportunidad" disabled>  4
+                    <input id="5" type="checkbox" name="oportunidad" disabled>  5
+                    <input id="6" type="checkbox" name="oportunidad" disabled>  6
+                    <input id="7" type="checkbox" name="oportunidad" disabled>  7
+                    <input id="8" type="checkbox" name="oportunidad" disabled>  8                    
+                </fieldset>
+            </div>
+            </center>
+
             
-            <fieldset id="field1" class="field1"> <!-- CUADRO CON INDICACIONES -->
+            <fieldset id="field1" class="field1" disabled> <!-- CUADRO CON INDICACIONES -->
                 <legend>Indicación:</legend>
-                <div><input id="indicacion1" type="checkbox" name="indicacion" value="ant pac" /> Ant. pac.</label></div>
-                <div><input id="indicacion2" type="checkbox" name="indicacion" value="ant asept" /> Ant. asept.</label></div>
-                <div><input id="indicacion3" type="checkbox" name="indicacion" value="desp ent pac" /> Desp. ent. p.</label></div>
-                <div><input id="indicacion4" type="checkbox" name="indicacion" value="desp pac" /> Desp. pac.</label></div>
-                <div><input id="indicacion5" type="checkbox" name="indicacion" value="desp secre" /> Desp. fc.</label></div>
+                <div><input id="indicacion" type="checkbox" name="indicacion" value="ant pac" /> Ant. pac.</label></div>
+                <div><input id="indicacion" type="checkbox" name="indicacion" value="ant asept" /> Ant. asept.</label></div>
+                <div><input id="indicacion" type="checkbox" name="indicacion" value="desp ent pac" /> Desp. ent. p.</label></div>
+                <div><input id="indicacion" type="checkbox" name="indicacion" value="desp pac" /> Desp. pac.</label></div>
+                <div><input id="indicacion" type="checkbox" name="indicacion" value="desp secre" /> Desp. fc.</label></div>
             </fieldset>
-            <fieldset id="field2" class="field1"> <!-- CUADRO CON ACCIONES -->
+            <fieldset id="field2" class="field1" disabled> <!-- CUADRO CON ACCIONES -->
                 <legend>Acción de HM:</legend>
                 <div><input type="radio" name="accion" value="FM" id="fm" /> FM</label></div>
                 <div><input type="radio" name="accion" value="LM" id="lm" /> LM</label></div>
