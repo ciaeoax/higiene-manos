@@ -1,3 +1,13 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 body{
     background-color: #00594c;
     font-family: 'Georgia', sans-serif;
@@ -13,13 +23,18 @@ body{
     background-color: #f9f9f9;
     font-family: 'Georgia', sans-serif;
 }
+.form-group2 {
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+}
 .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     display: flex;
     align-items: center;
 }
 .form-group label {
-    width: 150px;
+    width: 20%;
     margin-right: 10px;
     margin-left: 20px;
 }
@@ -61,7 +76,8 @@ fieldset{
     font-family: 'Georgia', sans-serif;
     font-size: 20px;
     height:50px;
-    width:100px;
+    width:25%;
+    margin-left: 10px;
 }
 div{
     padding: 5px;
