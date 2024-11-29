@@ -40,6 +40,7 @@ document.getElementById('categoria').addEventListener('change', function(event){
         document.getElementById('categoriatxt').required = false;
     }
 });
+// ASIGNANDO EL EVENT AL BOTON
 document.getElementById('buscar').addEventListener('click', search);
 
 async function search(){
@@ -193,6 +194,7 @@ async function submitForm() {
     }
     //console.log(values_ind);
     //window.confirm("Se registrará otra oportunidad a la anterior?");
+    // 
 
     endTime = new Date();
     var time = endTime - initTime;
