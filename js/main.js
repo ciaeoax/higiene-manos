@@ -40,6 +40,98 @@ document.getElementById('categoria').addEventListener('change', function(event){
         document.getElementById('categoriatxt').required = false;
     }
 });
+document.getElementById('buscar').addEventListener('click', search);
+
+async function search(){
+    document.getElementById('field1').disabled = true;
+    document.getElementById('field2').disabled = true;
+    document.getElementById('1').disabled = true;
+    document.getElementById('buscar').disabled = true;
+    document.getElementById('matriculaOpo').disabled = true;
+    if (document.getElementById('matriculaOpo').value == '') {
+        alert('No se ha ingresado ninguna matrícula.')
+        document.getElementById('buscar').disabled = false;
+        document.getElementById('matriculaOpo').disabled = false;
+        return;
+    }
+    if ((document.getElementById('matriculaOpo').value.length != 8 && document.getElementById('matriculaOpo').value.length != 9)){
+        alert('Ingrese una Matricula del Observado correcta: 8-9 dígitos.');
+        document.getElementById('buscar').disabled = false;
+        document.getElementById('matriculaOpo').disabled = false;
+        return;
+    }
+    if (document.getElementById('hospital').value == 'HGZ 01'){
+        url = 'https://script.google.com/macros/s/AKfycbxZpscWA03Lv4FZq0qo9jqDz5TUFgMLC2zZZm8VZWiobudx867nfE9BYbeJAx-ndwBC/exec'//'https://script.google.com/macros/s/AKfycbygcC5d6p6p7vgO3IX7GqH5PGDSQGHe_u2hfTIK7FljMpR_BlMCzcEZNhUjrnuKReNs/exec'
+    }else if (document.getElementById('hospital').value == 'HGZMF 02'){
+        url = 'https://script.google.com/macros/s/AKfycbyX6SbFotXSYiKt0Q3IpGS2FtXQzafdOYto-cDZF8cXzoaH9RT746FvGiZk8wbeG0Q-/exec'
+    }else if (document.getElementById('hospital').value == 'HGZ 03'){
+        url = 'https://script.google.com/macros/s/AKfycbxGVe1hUxzoaVi87P1YgfXT7MqybGWIY0aXwm-f2A3epnuEt9lUszZlp1dwe9_jBnjFCg/exec'
+    }else if (document.getElementById('hospital').value == 'HGSMF 41'){
+        url = 'https://script.google.com/macros/s/AKfycbzdLMFb6Qvn-HIi0hpLVJaG8WwvhmVwbbjnC6RgQS0YLp-uQtadg1BPb-V4FGfyCAHv/exec'
+    }else{
+        alert('Unidad no seleccionada.')
+        document.getElementById('buscar').disabled = false;
+        document.getElementById('matriculaOpo').disabled = false;
+        return;
+    }
+    const formData = {
+        action: 'search',
+        matricula2: document.getElementById('matriculaOpo').value
+    };
+    try {
+        const response = await fetch(url, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            document.getElementById('field1').disabled = false;
+            document.getElementById('field2').disabled = false;
+            document.getElementById('buscar').disabled = false;
+            document.getElementById('matriculaOpo').disabled = false;
+            for (var i = 1; i <= 8; i++) {
+                document.getElementById(i.toString()).checked = false;
+                document.getElementById(i.toString()).disabled = false;
+            }
+            if (result.data.length >= 8){
+                alert('Ha sobrepasado el límite de oportunidades para la matrícula observada.');
+                document.getElementById('categoria').value = '';
+                document.getElementById('matriculaOpo').value = '';
+                document.getElementById('1').checked = true;
+                for (var i = 2; i <= 8; i++) {
+                    document.getElementById(i.toString()).disabled = true;
+                }
+                return;
+            }
+            //valor = valor + 1;
+            for (var i = 1; i <= result.data.length+0; i++) {
+                document.getElementById(i.toString()).checked = true;
+                document.getElementById(i.toString()).disabled = true;
+            }
+            if ((result.data.length+1) <= 8) {                
+                document.getElementById((result.data.length+1).toString()).checked = true;
+            }
+            for (var i = result.data.length+2; i <= 8; i++) {
+                document.getElementById(i.toString()).disabled = true;
+            }
+        } else {
+            console.error('Error:', result.message);
+            document.getElementById('result').textContent = `Error: ${result.message}`;
+        }
+    } catch (error) {
+        console.error('Error submitting data:', error);
+        document.getElementById('result').textContent = `Error: ${error.message}`;
+    }
+}
 async function submitForm() {
     var loader = document.getElementById('loader');
     loader.hidden = false;
@@ -56,14 +148,14 @@ async function submitForm() {
         loader.hidden = true;
         return;
     }
-    if (document.getElementById('matricula').value.length != 8){
-        alert('Ingrese una Matricula correcta: 8 dígitos.');
+    if (document.getElementById('matricula').value.length != 8 && document.getElementById('matricula').value.length != 9){
+        alert('Ingrese una Matricula de Observador correcta: 8-9 dígitos.');
         document.getElementById('submit').disabled = false;
         loader.hidden = true;
         return;
     }
-    if (document.getElementById('matriculaOpo').value.length != 8){
-        alert('Ingrese una Matricula correcta: 8 dígitos.');
+    if (document.getElementById('matriculaOpo').value.length != 8 && document.getElementById('matriculaOpo').value.length != 9){
+        alert('Ingrese una Matricula del Observado correcta: 8-9 dígitos.');
         document.getElementById('submit').disabled = false;
         loader.hidden = true;
         return;
@@ -109,6 +201,7 @@ async function submitForm() {
     var mseconds = time - (seconds * 1000) - (minutes * 60 * 1000);
     var duracion = minutes + ":" + seconds + "." + mseconds;    
     const formData = {
+        action: 'form',
         turno: document.getElementById('turno').value.toUpperCase(),
         servicio: serviciovalue.toUpperCase(),
         nombre: document.getElementById('nombre').value.toUpperCase(),
@@ -122,13 +215,18 @@ async function submitForm() {
     };
     if (document.getElementById('hospital').value == 'HGZ 01'){
         console.log(document.getElementById('hospital').value);
-        url = 'https://script.google.com/macros/s/AKfycbygcC5d6p6p7vgO3IX7GqH5PGDSQGHe_u2hfTIK7FljMpR_BlMCzcEZNhUjrnuKReNs/exec'
+        url = 'https://script.google.com/macros/s/AKfycbxZpscWA03Lv4FZq0qo9jqDz5TUFgMLC2zZZm8VZWiobudx867nfE9BYbeJAx-ndwBC/exec'//'https://script.google.com/macros/s/AKfycbygcC5d6p6p7vgO3IX7GqH5PGDSQGHe_u2hfTIK7FljMpR_BlMCzcEZNhUjrnuKReNs/exec'
     }else if (document.getElementById('hospital').value == 'HGZMF 02'){
-        url = 'https://script.google.com/macros/s/AKfycbxV8YJsaPwDTMARYsArsxL8IlqhaasZgeWHKBtnD2xtPebDjWZuxxz52a2Lm3v7qKht/exec'
+        url = 'https://script.google.com/macros/s/AKfycbyX6SbFotXSYiKt0Q3IpGS2FtXQzafdOYto-cDZF8cXzoaH9RT746FvGiZk8wbeG0Q-/exec'
     }else if (document.getElementById('hospital').value == 'HGZ 03'){
-        url = 'https://script.google.com/macros/s/AKfycby0HkIzc8OpF_GWImp2uMNOjYGK0h8l7ytH_HP7uplCV4wUkuXXtFAhpbF2X5W343SV7g/exec'
+        url = 'https://script.google.com/macros/s/AKfycbxGVe1hUxzoaVi87P1YgfXT7MqybGWIY0aXwm-f2A3epnuEt9lUszZlp1dwe9_jBnjFCg/exec'
     }else if (document.getElementById('hospital').value == 'HGSMF 41'){
-        url = 'https://script.google.com/macros/s/AKfycbwdkVELMEB_kWPgmj8bLOARGG9A6zWeOmHLhYVmc0fsqU67Ieh9IkUPoDGKSLzvgsP5/exec'
+        url = 'https://script.google.com/macros/s/AKfycbzdLMFb6Qvn-HIi0hpLVJaG8WwvhmVwbbjnC6RgQS0YLp-uQtadg1BPb-V4FGfyCAHv/exec'
+    }else{
+        alert('Unidad no seleccionada.')
+        document.getElementById('submit').disabled = false;
+        loader.hidden = true;
+        return;
     }
     try {
         const response = await fetch(url, { 
@@ -151,7 +249,7 @@ async function submitForm() {
                 document.getElementById(i.toString()).disabled = false;
             }
             if (result.data.length >= 8){
-                alert('Ha sobrepasado el límite de oportunidades para la matrícula observada.');
+                alert('Ha alcanzado el límite de oportunidades para la matrícula observada. Ultimo registro hecho.');
                 document.getElementById('categoria').value = '';
                 document.getElementById('matriculaOpo').value = '';
                 for (var i = 1; i <= 5; i++) {
@@ -176,14 +274,14 @@ async function submitForm() {
             document.getElementById('categoriatxt').value = '';
             valor = valor + 1;
             document.getElementById('submit').disabled = false;
-            for (var i = 1; i <= result.data.length+1; i++) {
+            for (var i = 1; i <= result.data.length+0; i++) {
                 document.getElementById(i.toString()).checked = true;
                 document.getElementById(i.toString()).disabled = true;
             }
-            if ((result.data.length+2) <= 8) {                
-                document.getElementById((result.data.length+2).toString()).checked = true;
+            if ((result.data.length+1) <= 8) {                
+                document.getElementById((result.data.length+1).toString()).checked = true;
             }
-            for (var i = result.data.length+3; i <= 8; i++) {
+            for (var i = result.data.length+2; i <= 8; i++) {
                 document.getElementById(i.toString()).disabled = true;
             }
             for (var i = 1; i <= 5; i++) {
